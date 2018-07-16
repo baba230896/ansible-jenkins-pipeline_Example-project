@@ -1,0 +1,40 @@
+---
+- name: What if we use yum_repository?
+  yum_repository:
+    baseurl: https://dl.fedoraproject.org/pub/epel/7Server/x86_64/
+    description: "Epel release."
+    name: epel-release
+    state: present
+  when: ansible_os_family == 'Redhat'
+
+- name: Install python-jenkins
+  become: yes
+  yum:
+    name: python-jenkins
+    state: present
+    disable_gpg_check: yes
+  when: ansible_os_family == 'Redhat'
+
+- name: Install python-pip for Ubuntu
+  become: yes
+  apt:
+    name: python-pip
+    state: present 
+  when: ansible_os_family == "Debian"
+ 
+- name: Install python-jenkins for Ubuntu
+  become: yes
+  command: pip install python-jenkins
+  when: ansible_os_family == 'Debian'
+
+- name: Install lxml using Pip
+  become: yes
+  command: pip install lxml
+    
+- jenkins_job:
+    config: "{{ lookup('file', 'templates/config.xml') }}"
+    name: job1
+    #state: present
+    password: admin
+    url: http://{{ jenkins_hostname }}:8080
+    user: admin
