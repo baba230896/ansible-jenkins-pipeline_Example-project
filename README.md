@@ -6,11 +6,12 @@ Installs Jenkins CI on RHEL/CentOS and Debian/Ubuntu servers.
 
 Use latest Ansible Version
 
+
 ## Dependencies
 
   - ansible-java
   
-(Already Added)
+Download ansible-java in same folder in which ansible-jenkins-pipeline_Example-project.
 
 ## Role Variables
 
@@ -124,7 +125,7 @@ Changes made to the Jenkins init script; the default set of changes set the conf
   roles:
     - role: ansible-java
       become: true  
-    - role: ansible-jenkins
+    - role: ansible-jenkins-pipeline_Example-project
       become: true
 ```
 
