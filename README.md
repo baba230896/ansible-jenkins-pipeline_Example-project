@@ -121,6 +121,7 @@ Changes made to the Jenkins init script; the default set of changes set the conf
 ## Example Playbook
 
 ```yaml
+---
 - hosts: jenkins
   become: true
   roles:
