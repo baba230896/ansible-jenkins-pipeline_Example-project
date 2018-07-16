@@ -1,12 +1,16 @@
 # Ansible Role: Jenkins CI
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-jenkins.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-jenkins)
-
 Installs Jenkins CI on RHEL/CentOS and Debian/Ubuntu servers.
 
-## Requirements
+## Best Practice 
 
-Requires `curl` to be installed on the server. Also, newer versions of Jenkins require Java 8+ (see the test playbooks inside the `tests/` directory for an example of how to use newer versions of Java for your OS).
+Use latest Ansible Version
+
+## Dependencies
+
+  - ansible-java
+  
+(Already Added)
 
 ## Role Variables
 
@@ -101,7 +105,7 @@ This role will install the latest version of Jenkins by default (using the offic
 
 It is also possible stop the repo file being added by setting  `jenkins_repo_url = ''`. This is useful if, for example, you sign your own packages or run internal package management (e.g. Spacewalk).
 
-    jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
+    jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dpermissive-script-security.enabled=true"
 
 Extra Java options for the Jenkins launch command configured in the init file can be set with the var `jenkins_java_options`. For example, if you want to configure the timezone Jenkins uses, add `-Dorg.apache.commons.jelly.tags.fmt.timeZone=America/New_York`. By default, the option to disable the Jenkins 2.0 setup wizard is added.
 
@@ -113,26 +117,14 @@ Extra Java options for the Jenkins launch command configured in the init file ca
 
 Changes made to the Jenkins init script; the default set of changes set the configured URL prefix and add in configured Java options for Jenkins' startup. You can add other option/value pairs if you need to set other options for the Jenkins init file.
 
-## Dependencies
-
-  - geerlingguy.java
-
 ## Example Playbook
 
 ```yaml
 - hosts: jenkins
-  vars:
-    jenkins_hostname: jenkins.example.com
   roles:
-    - role: geerlingguy.java
-    - role: geerlingguy.jenkins
+    - role: ansible-java
+      become: true  
+    - role: ansible-jenkins
       become: true
 ```
 
-## License
-
-MIT (Expat) / BSD
-
-## Author Information
-
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
