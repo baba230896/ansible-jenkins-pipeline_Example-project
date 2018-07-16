@@ -5,15 +5,18 @@
     description: "Epel release."
     name: epel-release
     state: present
-  when: ansible_os_family == 'Redhat'
+  when: ansible_os_family == 'RedHat'
 
 - name: Install python-jenkins
   become: yes
   yum:
-    name: python-jenkins
+    name: "{{ item }}"
     state: present
     disable_gpg_check: yes
-  when: ansible_os_family == 'Redhat'
+  loop:
+    - python-jenkins
+    - python-pip
+  when: ansible_os_family == 'RedHat'
 
 - name: Install python-pip for Ubuntu
   become: yes

@@ -2,7 +2,7 @@
 <flow-definition plugin="workflow-job@2.10">
   <actions/>
   <description></description>
-  <keepDependencies>false</keepDependencies>
+  <keepDependencies>true</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers/>
