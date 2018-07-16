@@ -122,10 +122,9 @@ Changes made to the Jenkins init script; the default set of changes set the conf
 
 ```yaml
 - hosts: jenkins
+  become: true
   roles:
     - role: ansible-java
-      become: true  
     - role: ansible-jenkins-pipeline_Example-project
-      become: true
 ```
 
