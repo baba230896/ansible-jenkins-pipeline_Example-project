@@ -46,3 +46,4 @@
   until: ( result_job.failed == false )
   retries: "{{ jenkins_connection_retries }}"
   delay: "{{ jenkins_connection_delay }}"
+  changed_when: false
