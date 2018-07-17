@@ -45,10 +45,9 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
-  
-- name: meta handlers
-  meta: flush_handlers
- 
+  notify:
+    - configure default users
+
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
   when: (jenkins_users_config is defined and jenkins_users_config.changed) or
