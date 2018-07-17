@@ -59,3 +59,4 @@
 # Update Jenkins and install configured plugins.
 - include: plugins.yml
 - include: jobs.yml
+  when: result.stdout.find("200 OK") != -1
