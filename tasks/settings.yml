@@ -45,12 +45,10 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
-
-- name: Trigger handlers immediately in case Jenkins was installed
   notify:
     - restart jenkins
-    - configure default users
-    
+    - configure default users   
+ 
 - debug:
     var: jenkins_users_config
     var: jenkins_http_config
