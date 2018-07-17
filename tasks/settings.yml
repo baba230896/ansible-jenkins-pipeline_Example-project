@@ -54,3 +54,15 @@
   when: (jenkins_users_config is defined and jenkins_users_config.changed) or
         (jenkins_http_config is defined and jenkins_http_config.changed) or
         (jenkins_home_config is defined and jenkins_home_config.changed)
+
+- name: fix a defect to disable setup wizard
+  jenkins_script:
+    script: |
+      import static jenkins.model.Jenkins.instance as jenkins
+      import jenkins.install.InstallState
+      if (!jenkins.installState.isSetupComplete()) {
+        InstallState.INITIAL_SETUP_COMPLETED.initializeState()
+      }
+    url: http://{{ jenkins_hostname }}:8080
+    user: "{{ jenkins_admin_username }}"
+    password: "{{ jenkins_admin_password }}"
