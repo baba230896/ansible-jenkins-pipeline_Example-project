@@ -51,8 +51,8 @@
 
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
-  when: (jenkins_users_config is defined and jenkins_users_config.changed) or
-        (jenkins_http_config is defined and jenkins_http_config.changed) or
+  when: (jenkins_users_config is defined and jenkins_users_config.changed) and
+        (jenkins_http_config is defined and jenkins_http_config.changed) and
         (jenkins_home_config is defined and jenkins_home_config.changed)
 
 - name: fix a defect to disable setup wizard
