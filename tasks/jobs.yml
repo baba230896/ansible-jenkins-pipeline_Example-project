@@ -38,6 +38,6 @@
     config: "{{ lookup('file', 'templates/config.xml') }}"
     name: job1
     #state: present
-    password: admin
+    password: {{ jenkins_admin_password }}
     url: http://{{ jenkins_hostname }}:8080
-    user: admin
+    user: {{ jenkins_admin_username }}
