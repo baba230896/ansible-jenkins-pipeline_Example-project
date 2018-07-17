@@ -54,6 +54,12 @@
     path: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
     state: absent
 
+- name: Immediately restart Jenkins on http or user changes.
+  service: name=jenkins state=restarted
+  when: (jenkins_users_config is defined and jenkins_users_config.changed) or
+        (jenkins_http_config is defined and jenkins_http_config.changed) or
+        (jenkins_home_config is defined and jenkins_home_config.changed)
+        
 - name: fix a defect to disable setup wizard
   jenkins_script:
     script: |
@@ -69,11 +75,5 @@
   until: ( result.failed == false )
   retries: "{{ jenkins_connection_retries }}"
   delay: "{{ jenkins_connection_delay }}"
-  changed_when: false
-
-- name: Immediately restart Jenkins on http or user changes.
-  service: name=jenkins state=restarted
-  when: (jenkins_users_config is defined and jenkins_users_config.changed) or
-        (jenkins_http_config is defined and jenkins_http_config.changed) or
-        (jenkins_home_config is defined and jenkins_home_config.changed)
+  changed_when: false 
  
