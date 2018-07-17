@@ -16,9 +16,6 @@
     regexp: '^JENKINS_HOME=.*'
     line: 'JENKINS_HOME={{ jenkins_home }}'
   register: jenkins_home_config
-  
-- debug:
-    var: jenkins_users_config
 
 - name: Immediately restart Jenkins on init config changes.
   service: name=jenkins state=restarted
@@ -31,9 +28,6 @@
     regexp: '^{{ jenkins_http_port_param }}='
     line: '{{ jenkins_http_port_param }}={{ jenkins_http_port }}'
   register: jenkins_http_config
-  
-- debug:
-    var: jenkins_users_config
 
 - name: Ensure jenkins_home {{ jenkins_home }} exists
   file:
@@ -53,7 +47,14 @@
     mode: 0775
 
 - name: Trigger handlers immediately in case Jenkins was installed
-  meta: flush_handlers
+  notify:
+    - restart jenkins
+    - configure default users
+    
+- debug:
+    var: jenkins_users_config
+    var: jenkins_http_config
+    var: jenkins_http_config
 
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
