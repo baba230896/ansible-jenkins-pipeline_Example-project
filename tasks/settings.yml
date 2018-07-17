@@ -60,7 +60,11 @@
 
 - debug:
     var: jenkins_users_config
+
+- debug
     var: jenkins_http_config
+    
+- debug:
     var: jenkins_home_config
 
 - name: Immediately restart Jenkins on http or user changes.
