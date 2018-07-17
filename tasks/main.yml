@@ -49,7 +49,10 @@
   retries: 5
   delay: 10
 
-
 # Update Jenkins and install configured plugins.
 - include: plugins.yml
+
+- name: reload jenkins
+  service: name=jenkins state=reloaded
+  
 - include: jobs.yml
