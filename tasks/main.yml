@@ -49,27 +49,6 @@
   retries: 5
   delay: 10
 
-- name: Remove Jenkins security init scripts after first startup.
-  file:
-    path: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
-    state: absent
-
-- name: fix a defect to disable setup wizard
-  jenkins_script:
-    script: |
-      import static jenkins.model.Jenkins.instance as jenkins
-      import jenkins.install.InstallState
-      if (!jenkins.installState.isSetupComplete()) {
-        InstallState.INITIAL_SETUP_COMPLETED.initializeState()
-      }
-    url: http://{{ jenkins_hostname }}:8080
-    user: "{{ jenkins_admin_username }}"
-    password: "{{ jenkins_admin_password }}"
-  register: result
-  until: ( result.failed == false )
-  retries: "{{ jenkins_connection_retries }}"
-  delay: "{{ jenkins_connection_delay }}"
-  changed_when: false
 
 # Update Jenkins and install configured plugins.
 - include: plugins.yml
