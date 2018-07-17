@@ -1,6 +1,5 @@
 ---
 - name: restart jenkins
-  become: yes
   service: name=jenkins state=restarted
 
 - name: configure default users
@@ -12,3 +11,6 @@
     group: "{{ jenkins_process_group }}"
     mode: 0775
   register: jenkins_users_config
+  
+- name: reload jenkins
+  service: name=jenkins state=reloaded
