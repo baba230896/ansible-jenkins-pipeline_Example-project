@@ -61,7 +61,7 @@
 - debug:
     var: jenkins_users_config
 
-- debug
+- debug:
     var: jenkins_http_config
     
 - debug:
