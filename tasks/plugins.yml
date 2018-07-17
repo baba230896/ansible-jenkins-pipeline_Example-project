@@ -40,13 +40,6 @@
     group: jenkins
     mode: 0440
 
-- name: Permissions for default.json updates info.
-  file:
-    path: "{{ jenkins_home }}/updates/default.json"
-    owner: jenkins
-    group: jenkins
-    mode: 0755
-  when: jenkins_plugins_folder_create.changed
 
 - name: Remove first and last line from json file
   replace:
