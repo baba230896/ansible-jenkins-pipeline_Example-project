@@ -33,8 +33,6 @@
 - name: Install lxml using Pip
   become: yes
   command: pip install lxml
-  notify:
-    - reload jenkins
     
 - name: jenkins job 
   jenkins_job:
