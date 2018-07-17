@@ -10,11 +10,11 @@ jenkins_package_state: present
 jenkins_connection_delay: 5
 jenkins_connection_retries: 60
 jenkins_home: /var/lib/jenkins
-jenkins_hostname: ec2-18-191-142-149.us-east-2.compute.amazonaws.com 
+jenkins_hostname: ec2-18-219-163-107.us-east-2.compute.amazonaws.com 
 jenkins_http_port: 8080
 jenkins_jar_location: /opt/jenkins-cli.jar
 jenkins_url_prefix: ""
-jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dpermissive-script-security.enabled=false"
+jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dpermissive-script-security.enabled=true"
 
 jenkins_plugins: [workflow-aggregator, permissive-script-security, github]
 jenkins_plugins_state: present
