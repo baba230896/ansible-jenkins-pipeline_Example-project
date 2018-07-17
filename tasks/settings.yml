@@ -45,8 +45,6 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
-  notify:
-    - configure default users
 
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
