@@ -49,7 +49,7 @@
 - name: Trigger handlers immediately in case Jenkins was installed
   meta: flush_handlers
   
-  - name: fix a defect to disable setup wizard
+- name: fix a defect to disable setup wizard
   jenkins_script:
     script: |
       import static jenkins.model.Jenkins.instance as jenkins
