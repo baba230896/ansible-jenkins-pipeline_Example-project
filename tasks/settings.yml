@@ -57,7 +57,7 @@
       if (!jenkins.installState.isSetupComplete()) {
         InstallState.INITIAL_SETUP_COMPLETED.initializeState()
       }
-    url: http://{{ jenkins_hostname }}:8080
+    url: "http://{{ jenkins_hostname }}:{{ jenkins_http_port }}"
     user: "{{ jenkins_admin_username }}"
     password: "{{ jenkins_admin_password }}"
   register: result
