@@ -52,7 +52,7 @@
     name: "{{ item }}"
     jenkins_home: "{{ jenkins_home }}"
     url_username: admin
-    url_password: password
+    url_password: admin
     state: "{{ jenkins_plugins_state }}"
     timeout: "{{ jenkins_plugin_timeout }}"
     updates_expiration: "{{ jenkins_plugin_updates_expiration }}"
