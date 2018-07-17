@@ -47,30 +47,12 @@
     mode: 0775
   notify:
     - restart jenkins  
+    - configure default users
  
-- name: configure default users
-  become: yes
-  template:
-    src: basic-security.groovy
-    dest: "{{ jenkins_home }}/init.groovy.d/"
-    owner: "{{ jenkins_process_user }}"
-    group: "{{ jenkins_process_group }}"
-    mode: 0775
-  register: jenkins_users_config
-
-- debug:
-    var: jenkins_users_config
-
-- debug:
-    var: jenkins_http_config
-    
-- debug:
-    var: jenkins_home_config
-
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
-  when: (jenkins_users_config is defined and jenkins_users_config.changed) and
-        (jenkins_http_config is defined and jenkins_http_config.changed) and
+  when: (jenkins_users_config is defined and jenkins_users_config.changed) or
+        (jenkins_http_config is defined and jenkins_http_config.changed) or
         (jenkins_home_config is defined and jenkins_home_config.changed)
 
 - name: fix a defect to disable setup wizard
