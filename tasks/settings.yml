@@ -45,10 +45,7 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
-
-- name: Trigger handlers immediately in case Jenkins was installed
-  meta: flush_handlers
-  
+ 
 - name: fix a defect to disable setup wizard
   jenkins_script:
     script: |
