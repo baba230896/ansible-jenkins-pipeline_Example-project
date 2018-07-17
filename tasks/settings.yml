@@ -46,13 +46,22 @@
     group: "{{ jenkins_process_group }}"
     mode: 0775
   notify:
-    - restart jenkins
-    - configure default users   
+    - restart jenkins  
  
+- name: configure default users
+  become: yes
+  template:
+    src: basic-security.groovy
+    dest: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0775
+  register: jenkins_users_config
+
 - debug:
     var: jenkins_users_config
     var: jenkins_http_config
-    var: jenkins_http_config
+    var: jenkins_home_config
 
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
