@@ -52,7 +52,7 @@
 # Update Jenkins and install configured plugins.
 - include: plugins.yml 
 
-#- name: flush handler
-#  meta: flush_handlers
+- name: flush handler
+  meta: flush_handlers
 
 - include: jobs.yml
