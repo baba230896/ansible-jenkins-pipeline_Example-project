@@ -46,6 +46,9 @@
     group: "{{ jenkins_process_group }}"
     mode: 0775
  
+- name: flush handler
+  meta: flush_handlers
+ 
 - name: Remove Jenkins security init scripts after first startup.
   file:
     path: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
