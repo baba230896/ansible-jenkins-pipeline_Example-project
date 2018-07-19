@@ -1,6 +1,8 @@
 #!groovy
 import hudson.security.*
 import jenkins.model.*
+import static jenkins.model.Jenkins.instance as jenkins
+import jenkins.install.InstallState
 
 
 def instance = Jenkins.getInstance()
@@ -27,3 +29,6 @@ else {
     instance.setAuthorizationStrategy(strategy)
     instance.save()
 
+if (!jenkins.installState.isSetupComplete()) {
+        InstallState.INITIAL_SETUP_COMPLETED.initializeState()
+      }
