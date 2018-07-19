@@ -45,6 +45,8 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
+  notify:
+    - configure default user
  
 - name: flush handler
   meta: flush_handlers
