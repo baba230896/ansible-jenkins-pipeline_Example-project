@@ -51,28 +51,6 @@
 - name: flush handler
   meta: flush_handlers
  
-- name: fix a defect to disable setup wizard
-  jenkins_script:
-    script: |
-      import static jenkins.model.Jenkins.instance as jenkins
-      import jenkins.install.InstallState
-      if (!jenkins.installState.isSetupComplete()) {
-        InstallState.INITIAL_SETUP_COMPLETED.initializeState()
-      }
-    url: "http://{{ jenkins_hostname }}:{{ jenkins_http_port }}"
-    user: "{{ jenkins_admin_username }}"
-    password: "{{ jenkins_admin_password }}"
-  register: result
-  until: ( result.failed == false )
-  retries: "{{ jenkins_connection_retries }}"
-  delay: "{{ jenkins_connection_delay }}"
-  changed_when: false   
-
-#- name: Remove Jenkins security init scripts after first startup.
-#  file:
-#    path: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
-#    state: absent
-
 - name: Immediately restart Jenkins on http or user changes.
   service: name=jenkins state=restarted
   when: (jenkins_users_config is defined and jenkins_users_config.changed) or
