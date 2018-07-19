@@ -25,6 +25,9 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- name: flush handler
+  meta: flush_handlers
+
 # Configure Jenkins init settings.
 - include: settings.yml
 
