@@ -5,13 +5,18 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers/>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
+<<<<<<< HEAD
   <triggers>
     <hudson.triggers.SCMTrigger>
     <spec>1 * * * *</spec>
     <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
+=======
+>>>>>>> parent of 00b9e31... Update config.xml
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.29">
     <script>node {
 stage(&apos;Stage 1&apos;) {
@@ -39,4 +44,5 @@ try {
 }</script>
     <sandbox>true</sandbox>
   </definition>
+  <triggers/>
 </flow-definition>
