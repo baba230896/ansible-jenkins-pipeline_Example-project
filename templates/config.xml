@@ -5,9 +5,13 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-      <triggers/>
-    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+    <spec>5 * * * *</spec>
+    <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.29">
     <script>node {
 stage(&apos;Stage 1&apos;) {
@@ -35,5 +39,4 @@ try {
 }</script>
     <sandbox>true</sandbox>
   </definition>
-  <triggers/>
 </flow-definition>
